@@ -95,6 +95,10 @@ export default function Home() {
           ];
 
           setMessages(updatedMessages2);
+          const element = document.getElementById("last");
+          element.scrollIntoView({
+            behaviour: 'smooth'
+          }) 
         } else {
           return "";
         }
@@ -141,12 +145,12 @@ export default function Home() {
           <div className="w-full max-w-screen-md mx-auto px-4">
             {messages
               .filter((message) => message.role !== "system")
-              .map((message, idx) => (
+              .map((message, idx, row) => (
                 <div key={idx} className="my-3">
                   <div className="font-bold">
                     {message.role === "user" ? "You" : "RandBot"}
                   </div>
-                  <div className="text-lg prose">
+                  <div id={idx+1 === row.length ? "last" : idx} className="text-lg prose">
                     <ReactMarkdown>{message.content}</ReactMarkdown>
                   </div>
                 </div>
